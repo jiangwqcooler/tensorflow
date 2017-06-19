@@ -77,8 +77,11 @@ def image_augment(data_set_name=None):
         for image_path in image_dir_list:
             image_raw_data = tf.gfile.FastGFile(image_path, 'r').read()
             file_path, file_ext = os.path.splitext(image_path)
+
+            # image transpose
             if config.IMAGE_TRANSPOSE:
 
+                # according to image ext choice adapt method
                 if file_ext == '.jpg' or file_ext == '.jpeg':
                     img_data = tf.image.decode_jpeg(image_raw_data, channels=3)
                     img_data = tf.image.convert_image_dtype(img_data, dtype=tf.float32)
@@ -104,8 +107,10 @@ def image_augment(data_set_name=None):
                 with tf.gfile.GFile(transposed_image_save_dir, 'wb') as f:
                     f.write(transposed.eval())
 
+            # image brightness
             if config.IMAGE_BRIGHTNESS:
 
+                # according to image ext choice adapt method
                 if file_ext == '.jpg' or file_ext == '.jpeg':
                     img_data = tf.image.decode_jpeg(image_raw_data, channels=3)
                     img_data = tf.image.convert_image_dtype(img_data, dtype=tf.float32)
@@ -125,8 +130,10 @@ def image_augment(data_set_name=None):
                 with tf.gfile.GFile(brightness_augment_image_save_dir, 'wb') as f:
                     f.write(brightness_augment.eval())
 
+            # image hue
             if config.IMAGE_HUE:
 
+                # according to image ext choice adapt method
                 if file_ext == '.jpg' or file_ext == '.jpeg':
                     img_data = tf.image.decode_jpeg(image_raw_data, channels=3)
                     img_data = tf.image.convert_image_dtype(img_data, dtype=tf.float32)
@@ -146,8 +153,10 @@ def image_augment(data_set_name=None):
                 with tf.gfile.GFile(hue_augment_image_save_dir, 'wb') as f:
                     f.write(hue_augment.eval())
 
+            # image saturation
             if config.IMAGE_SATURATION:
 
+                # according to image ext choice adapt method
                 if file_ext == '.jpg' or file_ext == '.jpeg':
                     img_data = tf.image.decode_jpeg(image_raw_data, channels=3)
                     img_data = tf.image.convert_image_dtype(img_data, dtype=tf.float32)
